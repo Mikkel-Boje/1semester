@@ -69,7 +69,12 @@ int main(void){
 
 void LinSearch(int array[], int n, int x, int print){
   int i;
-  /* Fyld ind hvad der mangler her */
+  
+  while(i <= n && x != array[i]) 
+  {
+    i += 1;
+  }
+
   if (print == 1){
     if (x == array[i]){
       printf("%d er på position %d\n",x,i+1);
@@ -80,9 +85,28 @@ void LinSearch(int array[], int n, int x, int print){
   }
 }
 
-void BinSearch(int array[], int n, int x, int print){
+void BinSearch(int array[], int n, int x, int print)
+{
   int i;
-  /* Fyld ind hvad der mangler her */
+  int j;
+  int m;
+
+  j = n;
+
+  while(i < j)
+  { 
+    m = floor((i + j) / 2);
+
+    if(x > array[m])
+    {
+      i = m + 1;
+    }
+    else
+    {
+      j = m;
+    }
+  }
+
   if (print == 1){
       if (x == array[i]){
          printf("%d er på position %d\n",x,i+1);
