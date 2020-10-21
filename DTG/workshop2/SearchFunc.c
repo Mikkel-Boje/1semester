@@ -69,7 +69,8 @@ int main(void){
 
 void LinSearch(int array[], int n, int x, int print){
   int i;
-  
+  i = 0;
+
   while(i <= n && x != array[i]) 
   {
     i += 1;
@@ -91,6 +92,7 @@ void BinSearch(int array[], int n, int x, int print)
   int j;
   int m;
 
+  i = 0;
   j = n;
 
   while(i < j)
