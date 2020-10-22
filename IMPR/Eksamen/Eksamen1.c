@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 void scan_data(operator, operand);
 void do_next_op(operator, operand);
@@ -21,7 +22,7 @@ void scan_data(operator, operand)
 {
     scanf(" %c", &operator);
 
-    if(isBinary(operator) = 1)
+    if(isBinary(operator))
     {
         scanf(" %lf", &operand);
     }
@@ -31,9 +32,17 @@ void scan_data(operator, operand)
     }
 }
 
-void do_next_op(operator, operand)
+void do_next_op(operator, operand, *akkumulator)
 {
+    switch (operator)
+    {
+    case '+':
+        *akkumulator =  
+        break;
 
+    default:
+        break;
+    }
 
 }
 
@@ -44,7 +53,12 @@ double run_calculator()
 
 int isBinary(operator)
 {
-    if()
-
-
+    if(operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '^')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
