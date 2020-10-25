@@ -1,3 +1,5 @@
+/* Lavet af Mikkel Boje Larsen */
+
 #include <stdio.h>
 #include <math.h>
 
@@ -18,6 +20,7 @@ int main(void)
     return 0;
 }
 
+/* Denne funktion indlæser data for både operator og operand */
 char scan_data(double *operand)
 {
     char operator;
@@ -25,6 +28,7 @@ char scan_data(double *operand)
 
     scanf(" %c", &operator);
 
+/* Her findes der ud af om der skal indlæses en operand vha. IsBinary funktionen */
     if(isBinary(operator))
     {
         scanf(" %lf", &temp);
@@ -39,6 +43,7 @@ char scan_data(double *operand)
     return operator;
 }
 
+/* Denne funktion finder ud af hvad der skal beregnes for de forskellige valg af operatorer */
 double do_next_op(double *akkumulator)
 {
     double operand;
@@ -80,9 +85,9 @@ double do_next_op(double *akkumulator)
     default:
         break;
     }
-
 }
 
+/* Her er funktionen som sørger for at inteagere med brugeren og holder programmet igang så længde inputet ikke er 0 */
 void run_calculator(void)
 {
     double akkumulator = 0;
@@ -95,6 +100,7 @@ void run_calculator(void)
     }
 }
 
+/* Denne funktion bruges til at finde ud af om der skal indlæses en operand */
 int isBinary(char operator)
 {
     if(operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '^')
@@ -107,6 +113,7 @@ int isBinary(char operator)
     }
 }
 
+/* Laver denne funktion så jeg kan lave et input h som skriver denne beskred igen for at hjælpe brugeren med at huske de mulige inputs */
 void Setup()
 {
     printf("This is a calculator. \n");
