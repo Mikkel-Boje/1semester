@@ -5,7 +5,7 @@
 
 char scan_data(double *);
 int isBinary(char);
-void do_next_op(double *);
+void do_next_op(double *, char, double *);
 void run_calculator(void);
 void Setup();
 
@@ -29,7 +29,7 @@ char scan_data(double *operand)
     scanf(" %c", &operator);
 
 /* Her findes der ud af om der skal indlæses en operand vha. IsBinary funktionen */
-    if(isBinary(operator))
+    if(isBinary(operator) == 1)
     {
         scanf(" %lf", &temp);
     }
@@ -44,27 +44,24 @@ char scan_data(double *operand)
 }
 
 /* Denne funktion finder ud af hvad der skal beregnes for de forskellige valg af operatorer */
-void do_next_op(double *akkumulator)
+void do_next_op(double *operand, char operator, double *akkumulator)
 {
-    double operand;
-    char operator = scan_data(&operand);
-
     switch (operator)
     {
     case '+':
-        *akkumulator += operand; 
+        *akkumulator += *operand; 
         break;
     case '-':
-        *akkumulator -= operand; 
+        *akkumulator -= *operand; 
         break;
     case '*':
-        *akkumulator *= operand; 
+        *akkumulator *= *operand; 
         break;
     case '/':
-        *akkumulator /= operand; 
+        *akkumulator /= *operand; 
         break;
     case '^':
-        *akkumulator = pow(*akkumulator, operand); 
+        *akkumulator = pow(*akkumulator, *operand); 
         break;
     case '#':
         *akkumulator = sqrt(*akkumulator); 
@@ -87,16 +84,27 @@ void do_next_op(double *akkumulator)
     }
 }
 
-/* Her er funktionen som sørger for at inteagere med brugeren og holder programmet igang så længde inputet ikke er 0 */
+/* Her er funktionen som sørger for at inteagere med brugeren og holder programmet igang så længde inputet ikke er 0.
+Her findes også ud af om brugeren har indtastet noget der ikke var forventet */
 void run_calculator(void)
 {
     double akkumulator = 0;
+    double operand = 0;
+    char operator;
 
     while(run != 0)
     {
-        printf("Currently the result is: %lf \n", akkumulator);
-
-        do_next_op(&akkumulator);
+        operator = scan_data(&operand);
+        do_next_op(&operand, operator, &akkumulator);
+        
+        if(isBinary(operator) == 0 || isBinary(operator) == 1)
+        {
+            printf("Result so far is: %f \n", akkumulator);
+        }
+        else if(isBinary(operator) == 2)
+        {
+            printf("The final result is: %f \n", akkumulator);
+        }
     }
 }
 
@@ -107,9 +115,18 @@ int isBinary(char operator)
     {
         return 1;
     }
-    else
+    else if(operator == '#' || operator == '%' || operator == '!')
     {
         return 0;
+    }
+    else if(operator == 'q')
+    {
+        return 2;
+    }
+    else
+    {
+        /* returner f for false input */
+        return 'f';
     }
 }
 
