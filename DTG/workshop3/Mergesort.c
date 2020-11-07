@@ -21,13 +21,26 @@ int main(void){
 
 void Merge(int L[], int start, int slut, int midt){
   /* Start med at kopiere de to dellister ind i to nye lister L1 og L2, så vi ikke sletter nogle elementer fra L når vi begynder at flette elementerne derind */
-  
+  L1[5]
+  L2[5]
+  L1[] = L[]
   /* Herefter skal vi kopiere elementer fra L1 og L2 ind på pladserne i L mellem start og slut men i sorteret rækkefølge */
 	
 }
 
 void MergeSort(int L[], int start, int slut){
-  /* Udfyld her */
+
+  if(start < slut)
+  {
+      int m;
+      m = (start + slut) / 2;
+      MergeSort(L, start, m); 
+      MergeSort(L, m + 1, slut);
+      for (int i = 0; i < slut; i++)
+      {
+          L = Merge(L, start, slut, m);
+      }
+  }
 }
 
 void printList(int L[], int size){ 
