@@ -1,11 +1,12 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
-void Merge(int L[], int start, int slut, int midt);
-void MergeSort(int L[], int start, int slut);
+void Merge(int L[], int l, int r, int m);
+void MergeSort(int L[], int l, int r);
 void printList(int L[], int size);
 
-int main(void){ 
+int main(void)
+{ 
   int L[] = { 5, 3, 8, 1, 6, 10, 7, 2, 4, 9 }; 
   int L_size = sizeof(L) / sizeof(L[0]); 
   	
@@ -19,31 +20,70 @@ int main(void){
   return 0; 
 } 
 
-void Merge(int L[], int start, int slut, int midt){
-  /* Start med at kopiere de to dellister ind i to nye lister L1 og L2, så vi ikke sletter nogle elementer fra L når vi begynder at flette elementerne derind */
-  L1[5]
-  L2[5]
-  L1[] = L[]
-  /* Herefter skal vi kopiere elementer fra L1 og L2 ind på pladserne i L mellem start og slut men i sorteret rækkefølge */
-	
-}
-
-void MergeSort(int L[], int start, int slut){
-
-  if(start < slut)
+void MergeSort(int L[], int l, int r)
+{
+  if(l < r)
   {
       int m;
-      m = (start + slut) / 2;
-      MergeSort(L, start, m); 
-      MergeSort(L, m + 1, slut);
-      for (int i = 0; i < slut; i++)
-      {
-          L = Merge(L, start, slut, m);
-      }
+      m = l + (r - l) / 2;
+
+      MergeSort(L, l, m); 
+      MergeSort(L, m + 1, r);
+      Merge(L, l, r, m);
   }
 }
 
-void printList(int L[], int size){ 
+void Merge(int L[], int l, int r, int m)
+{
+  int L1_lenght = m - l + 1;
+  int L2_lenght = r - m;
+  int L1[L1_lenght], L2[L2_lenght];
+  int i = 0, j = 0, k = l;
+
+  for (i = 0; i < L1_lenght; i++)
+  {
+      L1[i] = L[l + i];
+  }
+  
+  for (j = 0; j < L2_lenght; j++)
+  {
+      L2[j] = L[m + j + 1];
+  }
+  
+  i = 0, j = 0;
+
+  while(i < L1_lenght && j < L2_lenght)
+  {
+      if(L1[i] <= L2[j])
+      {
+          L[k] = L1[i];
+          i++;
+      }
+      else
+      {
+          L[k] = L2[j];
+          j++;
+      } 
+    k++; 
+  }
+
+  while(i < L1_lenght)
+  {
+      L[k] = L1[i];
+      i++;
+      k++;
+  }
+  
+  while (j < L2_lenght)
+  {
+      L[k] = L2[j];
+      j++;
+      k++;
+  }   
+}
+
+void printList(int L[], int size)
+{ 
   int i; 
   for (i = 0; i < size; i++) 
     printf("%d ", L[i]); 
